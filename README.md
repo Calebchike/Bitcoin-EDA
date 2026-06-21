@@ -32,7 +32,7 @@ The data is read directly from a CSV hosted in this repository, so the notebooks
 ```
 Bitcoin-EDA/
 ├── Bitcoin_EDA_Q_A_2014-2026.ipynb     # Questions and answers, in code
-├── Bitcoin_EDA_Visualization.ipynb     # All charts
+├── Bitcoin_EDA_Visualization.ipynb     # All charts generated in python code
 ├── bitcoin_dataset.csv                 # Source data
 ├── images/                             # Chart exports used in this README
 └── README.md
