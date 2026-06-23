@@ -31,11 +31,14 @@ The data is read directly from a CSV hosted in this repository, so the notebooks
 
 ```
 Bitcoin-EDA/
-├── Bitcoin_EDA_Q_A_2014-2026.ipynb     # Questions and answers, in code
-├── Bitcoin_EDA_Visualization.ipynb     # All charts generated in python code
-├── bitcoin_dataset.csv                 # Source data
-├── images/                             # Chart exports used in this README
-└── README.md
+├── Bitcoin_EDA_Q&A_2014-2026.ipynb          # Questions and answers, in code
+├── Bitcoin_EDA_Visualization.ipynb          # All charts generated in python code
+├── Bitcoin_Naive_&_Linear_Regression.xml    # RapidMiner process workflow script
+├── bitcoin_dataset.csv                      # Original source dataset
+├── bitcoin_engineered.csv                   # Shifted, lagged, and normalized dataset from Python
+├── images/                                  # Chart exports used in this README
+│   └── rapidminer_optimized_flow            # Process flow diagram - RapidMiner architecture view
+└── README.md                                # Project documentation
 ```
 
 Both notebooks are self-contained and open directly in Google Colab via the badge at the top of each file.
