@@ -186,7 +186,7 @@ For users who wish to reproduce these results or inspect the operator configurat
 
 You can download the raw file here: 
 
-*To use this file: Download it, open RapidMiner Studio, and import the file as a new process (`File > Import Process...`). Note: You will need to re-link the 'Retrieve' operator to your local copy of the engineered dataset.*
+*To use this file: Download it, open RapidMiner Studio, and import the file as a new process. Note: You will need to re-link the 'Retrieve' operator to your local copy of the engineered dataset.*
 
 ---
 
@@ -196,11 +196,11 @@ The performance of each model was strictly evaluated using **Root Mean Squared E
 
 | Model Tier / Workflow Variant | Test RMSE ($) | Technical Engineering Verdict |
 | :--- | :--- | :--- |
+| **Naïve Baseline Benchmark** | *~1,148.49* | 🎯 The target random-walk benchmark to beat. |
 | **Initial SVM (Linear)** | ~71,110.94 | ❌ Completely decoupled; flat lines failed on non-linear exponential cycles. |
 | **Neural Network** | ~21,964.30 | ⚠️ Overfitted to training regimes; struggled on standard tabular timeline horizons. |
 | **Baseline Linear Regression** | ~6,340.13 | 📈 Significant structural improvement after adjusting capability constraints to regression. |
 | **Optimized Linear Regression** | **~2,789.97** | 📈 Massive breakthrough; cut ML error by over 56%. |
-| **Naïve Baseline Benchmark** | *~1,148.49* | 🎯 The target random-walk benchmark to beat. |
 
 ---
 
