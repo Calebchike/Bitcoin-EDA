@@ -163,10 +163,59 @@ Every month's return from 2014 through 2026, in one grid. The fastest way to see
 - Day-of-week and month-of-year patterns exist in the data, but the sample size per bucket (roughly a dozen years of observations) is thin enough that none of them should be mistaken for a reliable edge.
 
 ---
+## 🚀 Machine Learning & Predictive Modeling (RapidMiner Phase)
+
+Following the initial Exploratory Data Analysis (EDA) and feature engineering stage in Python, the engineered dataset (`bitcoin_engineered.csv`) was imported into **RapidMiner Studio** to build an end-to-end predictive pipeline for forecasting tomorrow's Bitcoin closing price (`Tomorrow_Close`).
+
+The primary objective was to evaluate whether machine learning models could outperform a robust **Naïve Baseline Strategy** (predicting that tomorrow's price equals today's close price).
+
+### 📐 Workflow Architecture & Methodology
+
+The RapidMiner pipeline, shown in the optimized process view below, was designed using a dual-track parallel evaluation paradigm.
+
+<img width="1486" height="720" alt="rapidminer_optimized_flow" src="https://github.com/user-attachments/assets/f5f8ae32-bd9f-4cd4-87d2-97e9c8599f20" />
+
+1. **The Baseline Stream (Top Track):** Isolated the raw `Close` price, calculated the benchmark metrics using a manual `prediction` role assignment via the *Generate Attributes* operator.
+2. **The Machine Learning Stream (Bottom Track):** Processed advanced engineered features through a *Select Attributes* block, normalized scales, partitioned historical data via sequential *Split Data* linear sampling (80% training / 20% testing), trained regression estimators, and applied the model for out-of-sample testing.
+
+---
+
+### 📥 Project Reproducibility: RapidMiner XML
+
+For users who wish to reproduce these results or inspect the operator configurations directly in RapidMiner Studio, the full `.XML` process file used for this phase is available in the repository.
+
+You can download the raw file here: 
+
+*To use this file: Download it, open RapidMiner Studio, and import the file as a new process (`File > Import Process...`). Note: You will need to re-link the 'Retrieve' operator to your local copy of the engineered dataset.*
+
+---
+
+### 📊 Iterative Model Performance & Benchmark Results
+
+The performance of each model was strictly evaluated using **Root Mean Squared Error (RMSE)** to penalize large, volatile price miscalculations.
+
+| Model Tier / Workflow Variant | Test RMSE ($) | Technical Engineering Verdict |
+| :--- | :--- | :--- |
+| **Initial SVM (Linear)** | ~71,110.94 | ❌ Completely decoupled; flat lines failed on non-linear exponential cycles. |
+| **Neural Network** | ~21,964.30 | ⚠️ Overfitted to training regimes; struggled on standard tabular timeline horizons. |
+| **Baseline Linear Regression** | ~6,340.13 | 📈 Significant structural improvement after adjusting capability constraints to regression. |
+| **Optimized Linear Regression** | **~2,789.97** | 📈 Massive breakthrough; cut ML error by over 56%. |
+| **Naïve Baseline Benchmark** | *~1,148.49* | 🎯 The target random-walk benchmark to beat. |
+
+---
+
+### Key Technical Breakthroughs & Optimization
+
+The transition from a raw **$6,340 RMSE** down to a highly competitive **$2,789 RMSE** represents the core analytical victory of this phase:
+
+1. **Handling Multicollinearity (Feature Pruning):** Linear Regression models natively degrade when fed features tracking identical structural patterns. By systematically pruning highly correlated, slow-moving indicators (**`SMA_30`** and **`Rolling_Vol_30d`**), and removing raw day-of **`Volume`** noise (while retaining `Volume_Lag_1`), the feature space was targeted specifically toward short-term momentum flags (`Close_Lag_1`, `Close_Lag_2`, `SMA_7`, and `Rolling_Vol_7d`).
+2. **Magnitude Scale Equalization:** By incorporating a data-wide **`Normalize`** step (Z-score transformation) ahead of data splitting, the absolute scale disparities between massive raw transactional volumes and fractional percentage daily returns were eliminated. This ensured balanced feature weight allocations across the linear solver.
+
+---
 
 ## Coming next
 
-A predictive modeling layer — baseline, classification, and time-series forecasting models, plus a backtested moving-average crossover strategy — is planned as a third notebook to extend this EDA into an actual trading-signal evaluation.
+A predictive modeling layer — time-series forecasting models, plus a backtested moving-average crossover strategy — is planned as a third notebook to extend this EDA into an actual trading-signal evaluation.
 
 ---
 
