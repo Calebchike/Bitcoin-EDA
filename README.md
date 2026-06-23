@@ -184,7 +184,7 @@ The RapidMiner pipeline, shown in the optimized process view below, was designed
 
 For users who wish to reproduce these results or inspect the operator configurations directly in RapidMiner Studio, the full `.XML` process file used for this phase is available in the repository.
 
-You can download the raw file here: 
+You can download the raw file here: https://raw.githubusercontent.com/Calebchike/Bitcoin-EDA/refs/heads/main/Bitcoin_Naive_%26_Linear_Regression_Model.xml
 
 *To use this file: Download it, open RapidMiner Studio, and import the file as a new process. Note: You will need to re-link the 'Retrieve' operator to your local copy of the engineered dataset.*
 
